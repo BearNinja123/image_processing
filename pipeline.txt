@@ -1,0 +1,5 @@
+python3 resize.py (images -> resized)
+python3 flip.py (resized -> flipped)
+python3 sampleImgs.py (flipped -> sampled)
+python3 folderizer.py (sampled -> folders)
+python3 savLite.py (folders -> npArrs)
