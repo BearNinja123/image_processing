@@ -10,8 +10,9 @@ import numpy as np
 import os, cv2
 
 #imgPath = os.path.join(os.getcwd(), 'images')
-imgPath = os.path.join(os.getcwd(), 'paintings290')
-augPath = os.path.join(os.getcwd(), 'resized_290_256')
+imgPath = os.path.join(os.getcwd(), 'metfaces1024')
+augPath = os.path.join(os.getcwd(), 'resizedMet')
+resizeSize = 256
 files = os.listdir(imgPath)
 
 def augChunk(start, end, size=512):
@@ -58,5 +59,5 @@ if __name__ == '__main__':
             end = numImgs
 
         #p = Process(target=augChunk, args=(start, end))
-        p = Process(target=augChunk, args=(start, end, 400))
+        p = Process(target=augChunk, args=(start, end, resizeSize))
         p.start()

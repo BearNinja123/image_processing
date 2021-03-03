@@ -7,6 +7,10 @@ import cv2, os, warnings, joblib
 np.random.seed(0)
 warnings.filterwarnings('ignore')
 
+path = 'flippedMet-Folderized'
+toFolder = 'npArrsMet'
+imgSize = (256, 256, 3)
+
 def lprint(g):
     print('\n\n\n{}\n\n\n'.format(g))
 
@@ -15,23 +19,30 @@ def vectorizer(folderNum, prefix='Files', toFolder='npArrs'):
     os.chdir('{}_{}'.format(prefix, folderNum))
     files = os.listdir()
     for i in tqdm(files):
-        array = plt.imread(i)
-        if np.max(array) > 1:
-            print('y')
-            raise
-            array = array.astype(np.float16)
-        else:
-            array = (2 * array - 1).astype(np.float16)
-
         try:
-            if array.shape == imgSize:
-                lite.append(array)
-            elif array.shape == imgSize[:-1]:
-                lite.append(np.repeat(np.expand_dims(array, -1), 3, axis=2))
+            array = plt.imread(i)
+            if np.max(array) > 1:
+                print('y')
+                raise
+                array = array.astype(np.float16)
             else:
-                print(array.shape)
-        except:
-            pass
+                array = (2 * array - 1).astype(np.float16)
+
+            try:
+                if array.shape == imgSize:
+                    lite.append(array)
+                elif array.shape == imgSize[:-1]:
+                    lite.append(np.repeat(np.expand_dims(array, -1), 3, axis=2))
+                else:
+                    print(array.shape)
+            except:
+                pass
+
+            del array
+        except KeyboardInterrupt:
+            raise
+        except Exception as e:
+            print(e)
     lite = np.array(lite).astype(np.float16)
     #print(lite.shape)
     os.chdir(os.path.join(parentPath, toFolder))
@@ -42,16 +53,12 @@ def vectorizer(folderNum, prefix='Files', toFolder='npArrs'):
 
 
 parentPath = os.getcwd()
-path = 'thumbnails128x128-Folderized'
-toFolder = 'npArrsFFHQ'
-imgSize = (128, 128, 3)
 os.chdir(path)
 folders = os.listdir()
 folders.sort()
 print(folders)
 numCores = 4
 
-'''
 try:
     os.mkdir(os.path.join(parentPath, toFolder))
 except:
@@ -68,7 +75,6 @@ for i in range(len(folders) // numCores):
 
     for j in processes:
         j.join()
-        '''
 
 processes = []
 for i in range(len(folders) % numCores):

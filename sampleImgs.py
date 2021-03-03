@@ -12,8 +12,8 @@ import os
 def d(x):
     return pi * x / 180
 
-sampleFromFolder = os.path.join(os.getcwd(), 'flipped290')
-sampleToFolder = os.path.join(os.getcwd(), 'sampled290')
+sampleFromFolder = os.path.join(os.getcwd(), 'flipped')
+sampleToFolder = os.path.join(os.getcwd(), 'sampled')
 maxW, maxH = 256, 256
 maxRot = 5
 #maxW, maxH = 32, 32
@@ -64,7 +64,7 @@ def sampleValidImage(img, imgW, imgH, thetaSeen):
 files = os.listdir(sampleFromFolder)
 #files = find(files, sArray=['Monet', 'Gogh', 'Pissarro', 'Sisley', 'Cezanne', 'Gauguin', 'Pierre', 'Mikhail', 'Munch', 'Greco', 'Dali', 'Manet', 'Matisse', 'Lautrec'])
 
-def sampleImgs(start, end, numSampled=2, rotateChange=0.0):
+def sampleImgs(start, end, numSampled=4, rotateChange=0.0):
     for i in tqdm(files[start:end]):
         try:
             img = Image.open(os.path.join(sampleFromFolder, i))

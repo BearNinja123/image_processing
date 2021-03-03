@@ -7,8 +7,8 @@ import numpy as np
 import os, cv2
 
 #imgPath = os.path.join(os.getcwd(), 'images')
-imgPath = os.path.join(os.getcwd(), 'resized_290_256')
-augPath = os.path.join(os.getcwd(), 'flipped290')
+imgPath = os.path.join(os.getcwd(), 'resizedMet')
+augPath = os.path.join(os.getcwd(), 'flippedMet')
 files = os.listdir(imgPath)
 
 def augChunk(start, end):

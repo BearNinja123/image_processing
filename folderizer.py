@@ -4,7 +4,7 @@ from tqdm import tqdm
 #initPath = sys.argv[1]
 #accPath = sys.argv[2]
 initPath = os.getcwd()
-accPath = 'thumbnails128x128'
+accPath = 'flippedMet'
 
 zeroAdder.add(os.path.join(initPath, accPath), 0)
 os.chdir(initPath)
